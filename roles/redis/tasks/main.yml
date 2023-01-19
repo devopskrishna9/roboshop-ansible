@@ -27,7 +27,7 @@
 - name: Start redis service
   ansible.builtin.systemd:
     name: redis
-    enable: yes
+    enabled: yes
     state: restarted
 
 
