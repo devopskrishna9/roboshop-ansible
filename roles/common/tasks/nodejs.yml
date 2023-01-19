@@ -47,16 +47,19 @@
   ansible.builtin.copy:
     src: mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
+  when: schema_load
 
 - name: Install mongodb
   ansible.builtin.yum:
     name: mongodb-org-shell
     state: installed
+  when: schema_load
 
 - name: Load schema
   community.mongodb.mongodb_shell:
     login_host: mongodb-dev.devopsnew9.online
     file: "/app/schema/{{component}}.js"
     idempotent: yes
+  When: schema_load
 
 
