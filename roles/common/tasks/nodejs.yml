@@ -1,50 +1,17 @@
 - name: Configure NodeJS repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-- name : Install nodejs
-  ansible.builtin.yum:
-    name: nodejs
-    state: installed
+- name: App Pre-Req
+  ansible.builtin.include_tasks: "app-prereq.yml"
 
-- name: Application user
-  ansible.builtin.user:
-    name: roboshop
-
-- name: Remove old app content
-  ansible.builtin.file:
-    path: /app
-    state: absent
-
-- name: Create app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
-
-- name: Download catalogue App content
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-    dest: /app
-    remote_src: yes
-
-- name: Install node js dependencies
+- name: Install Nodejs dependencies
   community.general.npm:
     path: /app
     state: latest
 
-- name: copy systemd files
-  ansible.builtin.copy:
-    src: "{{component}}.service"
-    dest: /etc/systemd/system/{{component}}.service
+- name: SystemD Setup
+  ansible.builtin.include_tasks: "systemd.yml"
 
-- name: start {{component}} service
-  ansible.builtin.systemd:
-    name: "{{component}}"
-    daemon-reload: yes
-    enabled: yes
-    state: restarted
-
-- name: load schema
+- name: Load Schema
   ansible.builtin.include_tasks: "{{schema_type}}-schema.yml"
   when: schema_load
-
-

@@ -1,0 +1,8 @@
+- name: Load MySQL Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/{{component}}.sql
+    login_host: mysql-dev.devopsnew9.online
+    login_user: root
+    login_password: "{{ root_mysql_password }}"
