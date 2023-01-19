@@ -58,7 +58,7 @@
     file: "/app/schema/catalogue.js"
     idempotent: yes
 
-- name: start catalogue service
+- name: Restart catalogue service
   ansible.builtin.systemd:
     state: restarted
     name: catalogue
