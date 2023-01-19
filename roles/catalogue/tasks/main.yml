@@ -41,6 +41,7 @@
     name: catalogue
     daemon-reload: yes
     enabled: yes
+    state: restarted
 
 - name: Copy mongo repo file
   ansible.builtin.copy:
@@ -58,9 +59,4 @@
     file: "/app/schema/catalogue.js"
     idempotent: yes
 
-- name: Restart catalogue service
-  ansible.builtin.systemd:
-    state: restarted
-    name: catalogue
-    enabled: yes
 
