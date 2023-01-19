@@ -44,7 +44,7 @@
     state: restarted
 
 - name: load schema
-  import_task: "{{schema_type}}-schema.yml"
+  ansible.builtin.include_tasks: "{{schema_type}}-schema.yml"
   when: schema_load
 
 
