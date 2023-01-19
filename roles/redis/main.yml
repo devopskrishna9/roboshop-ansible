@@ -1,15 +1,15 @@
 - name: Install redis repo
   ansible.builtin.yum:
     name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-    state: Intalled
+    state: installed
 
 - name: Enable dnf module 6
   ansible.builtin.shell: dnf module enable redis:remi-6.2 -y
 
-- name: Installed redis
+- name: Install redis
   ansible.builtin.yum:
     name: redis
-    state: Installed
+    state: installed
 
 - name: Update redis listen address
   ansible.builtin.replace:
