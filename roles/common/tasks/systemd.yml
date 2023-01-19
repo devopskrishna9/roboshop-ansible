@@ -1,5 +1,6 @@
 - name: COpy SystemD file
-  ansible.builtin.copy:
+ # ansible.builtin.copy: (before payment)
+  ansible.builtin.template:
     src: "{{component}}.service"
     dest: /etc/systemd/system/{{component}}.service
 
