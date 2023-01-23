@@ -1,11 +1,40 @@
-- name: Create parameters
+- name: Create Parameters
   hosts: localhost
   connection: local
   tasks:
-    - name: Lookup module for create parameters
+    - name: Create Parameters
       community.aws.aws_ssm_parameter_store:
         name: "{{ item.name }}"
         value: "{{ item.value }}"
         region: us-east-1
       loop:
-        - { name: "dev.cart.REDIS_HOST", value: "redis-dev.devopsnew9.online" }
+        - {name: "dev.cart.REDIS_HOST", value: "redis-dev.devopsb70.online" }
+        - {name: "dev.cart.CATALOGUE_HOST", value: "catalogue-dev.devopsb70.online" }
+        - {name: "dev.catalogue.MONGO", value: "true" }
+        - {name: "dev.catalogue.MONGO_URL", value: "mongodb://mongodb-dev.devopsb70.online:27017/catalogue" }
+        - {name: "dev.frontend.CATALOGUE_URL", value: "http://catalogue-dev.devopsb70.online:8080/" }
+        - {name: "dev.frontend.CART_URL", value: "http://cart-dev.devopsb70.online:8080/" }
+        - {name: "dev.frontend.USER_URL", value: "http://user-dev.devopsb70.online:8080/" }
+        - {name: "dev.frontend.PAYMENT_URL", value: "http://payment-dev.devopsb70.online:8080/" }
+        - {name: "dev.frontend.SHIPPING_URL", value: "http://shipping-dev.devopsb70.online:8080/" }
+        - {name: "dev.payment.CART_HOST", value: "cart-dev.devopsb70.online" }
+        - {name: "dev.payment.USER_HOST", value: "user-dev.devopsb70.online" }
+        - {name: "dev.payment.CART_PORT", value: "8080" }
+        - {name: "dev.payment.USER_PORT", value: "8080" }
+        - {name: "dev.payment.AMQP_HOST", value: "rabbitmq-dev.devopsb70.online" }
+        - {name: "dev.payment.AMQP_USER", value: "roboshop" }
+        - {name: "dev.shipping.CART_ENDPOINT", value: "cart-dev.devopsb70.online:8080" }
+        - {name: "dev.shipping.DB_HOST", value: "mysql-dev.devopsb70.online" }
+        - {name: "dev.user.MONGO", value: "true" }
+        - {name: "dev.user.MONGO_URL", value: "mongodb://mongodb-dev.devopsb70.online:27017/users" }
+        - {name: "dev.user.REDIS_HOST", value: "redis-dev.devopsb70.online" }
+
+        ### PASSWORDS SHOULD NEVER BE KEPT IN THESE REPOS, THOSE SHOULD BE CREATED MAUALLY, BUT FOR LAB PURPOSE IAM CREATING HERE
+    - name: Create Secrets
+      community.aws.aws_ssm_parameter_store:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        region: us-east-1
+        string_type: "SecureString"
+      loop:
+        - {name: "dev.payment.AMQP_PASS", value: "roboshop123" }
