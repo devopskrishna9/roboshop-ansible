@@ -12,4 +12,4 @@
     target: /app/schema/{{component}}.sql
     login_host: mysql-dev.devopsnew9.online
     login_user: root
-    login_password: "{{ root_mysql_password }}"
+    login_password: "{{ root_mysql_pass word }}"
