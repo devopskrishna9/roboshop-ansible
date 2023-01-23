@@ -3,7 +3,7 @@
   connection: local
   tasks:
     - name: Lookup module for create parameters
-      community:aws:aws_ssm_parameter_store:
+      community.aws.aws_ssm_parameter_store:
         name: "{{ item.name }}"
         value: "{{ item.value }}"
         region: us-east-1
