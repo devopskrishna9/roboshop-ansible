@@ -1,8 +1,2 @@
-#component: payment
-#schema_load: false
-
-
-
 component: payment
-schema_load: true
-schema_type: mysql
+schema_load: false
