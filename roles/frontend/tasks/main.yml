@@ -52,7 +52,7 @@
 - name: Download {{component}} App content
   ansible.builtin.unarchive:
     src: https://{{nexus_user}}:{{nexus_pass}}@172.31.0.224:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
-    dest: /usr/share/nginx/html
+    dest: /usr/share/nginx/html/
     remote_src: yes
   vars:
     nexus_user: "{{ lookup('aws_ssm', 'nexus.user', region='us-east-1' ) }}"
