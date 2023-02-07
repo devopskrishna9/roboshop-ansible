@@ -14,4 +14,4 @@
     login_user: root
     login_password: "{{ root_mysql_pass word }}"
   vars:
-    root_mysql_password: ""{{ lookup('aws_ssm', '{{env}}.{{component}}.DB_ADMIN_PASS', region='us-east-1' ) }}"
+    root_mysql_password: ""{{ lookup('aws_ssm', '{{env}}.mysql.DB_ADMIN_PASS', region='us-east-1' ) }}"
