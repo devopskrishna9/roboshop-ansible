@@ -1,5 +1,5 @@
 - name: RoboShop Setup
-  hosts: localhost
+  hosts: all
   connection: local
   become: yes
   roles:
