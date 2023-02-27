@@ -17,7 +17,7 @@
 - name: Download DocDB CA file
   ansible.builtin.get_url:
     url:  https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
-    dest: home/roboshop/{{component}}/rds-combined-ca-bundle.pem
+    dest: /app/rds-combined-ca-bundle.pem
   when: schema_load
 
 - name: SystemD Setup
