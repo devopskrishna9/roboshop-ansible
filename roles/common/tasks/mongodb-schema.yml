@@ -8,8 +8,11 @@
     name: mongodb-org-shell
     state: installed
 
+#- name: Load schema
+#  community.mongodb.mongodb_shell:
+#    login_host: mongodb-dev.devopsnew9.online
+#    file: "/app/schema/{{component}}.js"
+#    idempotent: yes
+
 - name: Load schema
-  community.mongodb.mongodb_shell:
-    login_host: mongodb-dev.devopsnew9.online
-    file: "/app/schema/{{component}}.js"
-    idempotent: yes
+  ansible.builtin.shell: mongo --ssl --host dev-docdb-cluster.cluster-cbziirskceyt.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username {{ lookup('aws_ssm', "{{env}}.docdb.DB_ADMIN_USER", region='us-east-1' ) }} --password {{ lookup('aws_ssm', "{{env}}.docdb.DB_ADMIN_PASS", region='us-east-1' ) }}
