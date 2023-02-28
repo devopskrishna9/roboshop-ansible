@@ -14,14 +14,14 @@
 #    file: "/app/schema/{{component}}.js"
 #    idempotent: yes
 
-#- name: Load schema
-#  ansible.builtin.shell: mongo --ssl --host dev-docdb-cluster.cluster-cbziirskceyt.us-east-1.docdb.amazonaws.com:27017 --sslCAFile /app/rds-combined-ca-bundle.pem --username {{ lookup('aws_ssm', '{{env}}.docdb.DB_ADMIN_USER', region='us-east-1') }} --password {{ lookup('aws_ssm', '{{env}}.docdb.DB_ADMIN_PASS', region='us-east-1') }}
+- name: Load schema
+  ansible.builtin.shell: mongo --ssl --host dev-docdb-cluster.cluster-cbziirskceyt.us-east-1.docdb.amazonaws.com:27017 --sslCAFile /app/rds-combined-ca-bundle.pem --username {{ lookup('aws_ssm', "{{env}}.{{component}}.DB_ADMIN_USER", region='us-east-1') }} --password {{ lookup('aws_ssm', '{{env}}.{{component}}.DB_ADMIN_PASS', region='us-east-1') }}
 
 
-- name: lookup ssm parameter store in the current region
-  debug: msg="{{ lookup('aws_ssm', '{{env}}.docdb.DB_ADMIN_USER' ) }}"
-
-
-
-
+#- name: lookup ssm parameter store in the current region
+#  debug: msg="{{ lookup('aws_ssm', '{{env}}.docdb.DB_ADMIN_USER' ) }}"
+#
+#
+#  {{ lookup('aws_ssm', "{{env}}.{{component}}.CATALOGUE_URL", region='us-east-1' ) }}
+#
 
