@@ -20,10 +20,19 @@
 
 - name: Download {{component}} App content
   ansible.builtin.unarchive:
-    src: https://{{nexus_user}}:{{nexus_pass}}@172.31.0.224:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+    src: http://{{nexus_user}}:{{nexus_pass}}@172.31.0.224:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
     dest: /app
     remote_src: yes
   vars:
     nexus_user: "{{ lookup('aws_ssm', 'nexus.user', region='us-east-1' ) }}"
     nexus_pass: "{{ lookup('aws_ssm', 'nexus.pass', region='us-east-1' ) }}"
 
+
+#- name: Download {{component}} App content
+#  ansible.builtin.unarchive:
+#    src: http://{{nexus_user}}:{{nexus_pass}}@172.31.1.57:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+#    dest: /app
+#    remote_src: yes
+#  vars:
+#    nexus_user: "{{ lookup('aws_ssm', 'nexus.user', region='us-east-1' ) }}"
+#    nexus_pass: "{{ lookup('aws_ssm', 'nexus.pass', region='us-east-1' ) }}"
