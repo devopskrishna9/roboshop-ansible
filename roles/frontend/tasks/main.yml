@@ -57,7 +57,7 @@
   vars:
     nexus_user: "{{ lookup('aws_ssm', 'nexus.user', region='us-east-1' ) }}"
     nexus_pass: "{{ lookup('aws_ssm', 'nexus.pass', region='us-east-1' ) }}"
-#
+
 - name: Copy RoboShop Config file to Nginx
   ansible.builtin.template:
     src: roboshop.conf
