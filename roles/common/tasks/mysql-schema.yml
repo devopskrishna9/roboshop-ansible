@@ -10,8 +10,6 @@
     state: import
     name: all
     target: /app/schema/{{component}}.sql
-    login_host: mysql-dev.devopsnew9.online
-    login_user: root
-    login_password: "{{ root_mysql_pass word }}"
-  vars:
-    root_mysql_password: "{{ lookup('aws_ssm', '{{env}}.mysql.DB_ADMIN_PASS', region='us-east-1' ) }}"
+    login_host: "{{ lookup('aws_ssm', '{{env}}.rds.ENDPOINT', region='us-east-1' ) }}"
+    login_user: "{{ lookup('aws_ssm', '{{env}}.rds.DB_ADMIN_USER', region='us-east-1' ) }}"
+    login_password: "{{ lookup('aws_ssm', '{{env}}.rds.DB_ADMIN_PASS', region='us-east-1' ) }}"
